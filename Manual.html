@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Metrika</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="manual_style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <div class="header-content">
+                <img src="favicon.ico" alt="Metrika Logo">
+                <div class="header-text">
+                    <h1>Manual de Usuario - Metrika</h1>
+                    <p>Tu guía para crear informes visuales de manera sencilla.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <nav id="toc">
+                <h2>Contenido</h2>
+                <ul>
+                    <li><a href="#introduccion">1. Introducción</a></li>
+                    <li><a href="#primeros-pasos">2. Primeros Pasos</a></li>
+                    <li><a href="#interfaz">3. Conociendo la Interfaz</a></li>
+                    <li><a href="#crear-graficos">4. Creando Visualizaciones</a></li>
+                    <li><a href="#funciones-avanzadas">5. Funciones Avanzadas</a></li>
+                    <li><a href="#guardar-exportar">6. Guardar y Exportar</a></li>
+                </ul>
+            </nav>
+
+            <main>
+                <section id="introduccion">
+                    <h2>1. Introducción</h2>
+                    <p>Bienvenido a <strong>Metrika</strong>. Esta herramienta está diseñada para ayudarte a transformar tus datos (de archivos CSV o Excel) en gráficos y tablas interactivas de forma rápida y sin complicaciones. Todo el procesamiento ocurre de forma local en tu computador, garantizando la privacidad de tu información.</p>
+                </section>
+
+                <section id="primeros-pasos">
+                    <h2>2. Primeros Pasos</h2>
+                    <p>Para empezar a trabajar con Metrika, lo primero que necesitas es cargar tus datos.</p>
+                    <ol>
+                        <li>En la pantalla de bienvenida, haz clic en el botón <strong>📂 Cargar Archivo</strong>.</li>
+                        <li>Selecciona un archivo desde tu computador. Metrika soporta los formatos <strong>.csv</strong> y <strong>.xlsx</strong> (Excel).</li>
+                        <li>Una vez cargado, la aplicación te llevará automáticamente a la pantalla principal de trabajo.</li>
+                    </ol>
+                    <div class="img-placeholder">
+                        <p><strong>Ejemplo Visual:</strong> Pantalla de bienvenida de Metrika, destacando el botón central para la carga de archivos.</p>
+                    </div>
+                </section>
+                
+                <section id="interfaz">
+                    <h2>3. Conociendo la Interfaz</h2>
+                    <p>La pantalla principal se divide en dos áreas: el <strong>Panel de Control</strong> a la izquierda y el <strong>Área de Dashboard</strong> a la derecha.</p>
+                    <div class="interface-layout">
+                        <div class="layout-box">
+                            <h3>Panel de Control (Izquierda)</h3>
+                            <ul>
+                                <li><strong>Botones de Acción:</strong> Para añadir gráficos, crear nuevos reportes, guardar y cargar.</li>
+                                <li><strong>Configuración de Gráfico:</strong> Donde defines el tipo de gráfico y qué datos mostrar.</li>
+                                <li><strong>Columnas Disponibles:</strong> Una lista de todas las columnas de tu archivo.</li>
+                                <li><strong>Filtros Globales:</strong> Para filtrar los datos en TODOS los gráficos a la vez.</li>
+                            </ul>
+                        </div>
+                        <div class="layout-box">
+                            <h3>Área de Dashboard (Derecha)</h3>
+                            <p>Este es tu lienzo. Aquí aparecerán todos los gráficos y tablas que crees. Puedes arrastrarlos para cambiar su posición y redimensionarlos desde su esquina inferior derecha.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="crear-graficos">
+                    <h2>4. Creando Visualizaciones</h2>
+                    <p>Sigue estos pasos para dar vida a tus datos:</p>
+                    <ol>
+                        <li><strong>Añadir un Gráfico:</strong> Haz clic en el botón <strong>➕ Añadir Gráfico</strong>. Aparecerá un nuevo recuadro (widget) en el dashboard.</li>
+                        <li><strong>Seleccionar Tipo:</strong> En el panel de control, elige el tipo de visualización que prefieras (Barras, Líneas, Pastel o Tabla).</li>
+                        <li><strong>Configurar Ejes:</strong>
+                            <ul>
+                                <li>Desde la lista de "Columnas Disponibles", <strong>arrastra una columna de texto o fecha</strong> al recuadro "Arrastra aquí para Eje X".</li>
+                                <li><strong>Arrastra una columna numérica</strong> al recuadro "Arrastra aquí para Eje Y".</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>¡Listo! El gráfico se generará automáticamente en el widget que tienes seleccionado.</p>
+                </section>
+
+                <section id="funciones-avanzadas">
+                    <h2>5. Funciones Avanzadas</h2>
+                    <h3>Agregación de Datos</h3>
+                    <p>Por defecto, Metrika suma los valores del Eje Y. Puedes cambiar esto haciendo clic en el ícono ▼ que aparece en el recuadro del Eje Y. Podrás elegir entre:</p>
+                    <ul>
+                        <li><strong>Suma:</strong> Suma todos los valores.</li>
+                        <li><strong>Promedio:</strong> Calcula el valor medio.</li>
+                        <li><strong>Recuento:</strong> Cuenta el número de registros.</li>
+                        <li><strong>Máximo / Mínimo:</strong> Muestra el valor más alto o más bajo.</li>
+                    </ul>
+                    <h3>Manejo de Fechas</h3>
+                    <p>Si arrastras una columna de fecha al Eje X, aparecerá una opción para "Agrupar por:". Esto te permite agrupar tus datos por Año, Trimestre, Mes o Día de la Semana, para un análisis de tendencias más claro.</p>
+                    <h3>Filtro Cruzado (Interactivo)</h3>
+                    <p>Esta es una de las funciones más potentes. Simplemente haz <strong>clic en una barra, una línea o una porción de un gráfico de pastel</strong>. Verás cómo todos los demás gráficos del dashboard se actualizan para mostrar únicamente los datos relacionados con tu selección. Para quitar el filtro, vuelve a hacer clic en el mismo elemento.</p>
+                    <h3>Personalización</h3>
+                    <p>Selecciona un widget y haz clic en el ícono de engranaje (⚙️) en su esquina superior derecha. Esto abrirá un panel para:</p>
+                    <ul>
+                        <li>Cambiar el título del gráfico.</li>
+                        <li>Ocultar el título o la leyenda.</li>
+                        <li>Cambiar la posición de la leyenda.</li>
+                        <li>Seleccionar diferentes paletas de colores.</li>
+                    </ul>
+                </section>
+
+                <section id="guardar-exportar">
+                    <h2>6. Guardar y Exportar</h2>
+                    <h3>Guardar y Cargar Configuración</h3>
+                    <ul>
+                        <li><strong>Guardar (💾):</strong> Guarda la estructura completa de tu dashboard (qué gráficos hay, cómo están configurados, filtros, etc.) en un archivo <code>.json</code>. Esto NO guarda los datos, solo la configuración.</li>
+                        <li><strong>Cargar (📂):</strong> Si tienes un archivo de datos cargado, puedes usar esta opción para cargar un archivo <code>.json</code> y restaurar un dashboard que habías guardado previamente.</li>
+                    </ul>
+                    <h3>Exportar Reporte</h3>
+                    <ul>
+                        <li><strong>Exportar Dashboard:</strong> Crea un archivo HTML independiente con una imagen visual de tu dashboard actual. Ideal para compartir por correo o en presentaciones.</li>
+                        <li><strong>Exportar Datos:</strong> Crea un archivo HTML con una tabla de los datos actualmente visibles (aplicando los filtros globales y el filtro cruzado si están activos).</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+    <footer>
+        <p>Fin del Manual de Usuario de Metrika. | <a href="test_final.html">Volver a la aplicación</a></p>
+    </footer>
+</body>
+</html>

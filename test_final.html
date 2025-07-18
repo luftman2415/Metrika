@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrika - Dashboard</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/gridstack@9.4.0/dist/gridstack.min.css" rel="stylesheet"/>
+    
+    <style>
+        /* Metrika - style.css (Versión Corregida) */
+
+        /* --- VARIABLES GLOBALES Y RESET BÁSICO --- */
+        :root {
+            --primary-color: #003da5;
+            --secondary-color: #f2a900;
+            --light-gray: #f4f4f9;
+            --dark-gray: #333;
+            --border-color: #ddd;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --danger-color: #d9534f;
+            --success-color: #5cb85c;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--light-gray);
+            color: var(--dark-gray); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* --- CABECERA --- */
+        header {
+            background-color: var(--primary-color); color: white; padding: 1.5rem 2rem;
+            display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow); flex-shrink: 0;
+        }
+        .header-logo { height: 50px; background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 5px; }
+        .header-text { flex-grow: 1; }
+        .header-text h1 { margin: 0; font-size: 2em; }
+        .header-text p { margin: 0; opacity: 0.9; font-size: 1.1em; }
+        .close-app-btn { font-size: 2.5em; color: rgba(255, 255, 255, 0.7); cursor: pointer; line-height: 1; padding: 0 10px; transition: all 0.2s; }
+        .close-app-btn:hover { color: white; transform: scale(1.2); }
+
+        /* --- LAYOUT PRINCIPAL Y PANTALLAS --- */
+        main.container { padding: 20px; max-width: 1600px; margin: auto; flex-grow: 1; box-sizing: border-box; }
+        .step-screen { display: none; }
+        
+        /* PANTALLA DE CARGA INICIAL */
+        #upload-screen.active {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background-color: white; border-radius: 8px; box-shadow: var(--shadow);
+            padding: 40px; margin: 5vh auto 0;
+        }
+        .file-upload-label {
+            background-color: var(--secondary-color); color: var(--dark-gray); font-weight: bold;
+            padding: 15px 30px; border-radius: 5px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s;
+            display: inline-block; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .file-upload-label:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+
+        /* --- [CORRECCIÓN CLAVE] PANTALLA PRINCIPAL DEL DASHBOARD --- */
+        #main-screen.active { 
+            display: flex; /* <-- Asegura el layout de columnas */
+            gap: 20px; 
+        }
+        
+        /* --- BARRA LATERAL (SIDEBAR) --- */
+        .sidebar {
+            width: 320px; flex-shrink: 0; background-color: white; padding: 20px; border-radius: 8px;
+            box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 15px;
+            height: fit-content; max-height: calc(100vh - 150px); overflow-y: auto;
+        }
+        .control-section { border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .sidebar > div:last-of-type { border-bottom: none; }
+        .sidebar h3 { margin-top: 0; text-align: center; color: var(--primary-color); }
+        .control-section h4 { margin-top: 0; margin-bottom: 10px; color: var(--primary-color); }
+        .instructions { font-size: 0.85em; color: #666; margin: -5px 0 10px 0; }
+        select, .modal-input { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); box-sizing: border-box;}
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; }
+
+        /* BOTONES */
+        .main-button, .secondary-button, .tertiary-button, .action-button, .danger-button {
+            width: 100%; padding: 12px 10px; font-size: 1em; border: none; border-radius: 5px;
+            cursor: pointer; font-weight: bold; transition: background-color 0.2s, transform 0.1s;
+        }
+        .main-button { background-color: var(--primary-color); color: white; }
+        .secondary-button { background-color: var(--light-gray); color: var(--dark-gray); border: 1px solid var(--border-color); }
+        .danger-button { background-color: var(--danger-color); color: white; }
+        .action-buttons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .action-buttons-grid .main-button { grid-column: 1 / -1; }
+        .action-button.save-button { background-color: var(--success-color); color: white; }
+        .action-button.load-button { background-color: #f0f0f0; color: #333; border: 1px solid #ccc; text-align: center; }
+        button:disabled, .load-button.disabled { background-color: #e9e9e9; color: #aaa; cursor: not-allowed; border-color: #ddd; opacity: 0.7; }
+        .export-buttons-group { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+
+        /* LISTA DE COLUMNAS Y ZONAS DE ARRASTRE */
+        .column-list-container { max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); padding: 5px; border-radius: 4px; }
+        .column-item {
+            background-color: #f9f9f9; padding: 8px; margin-bottom: 5px; border-radius: 4px; cursor: grab;
+            border-left: 4px solid var(--secondary-color); display: flex; justify-content: space-between; align-items: center;
+        }
+        .edit-col-btn { cursor: pointer; background: none; border: none; font-size: 1.1em; padding: 0 5px; opacity: 0.6; }
+        .dropzone {
+            position: relative; border: 2px dashed var(--border-color); padding: 20px 15px; margin-top: 10px;
+            text-align: center; border-radius: 5px; transition: background-color 0.2s, border-color 0.2s;
+        }
+        .dropzone.filled { background-color: rgba(92, 184, 92, 0.1); color: #3c763d; font-weight: bold; border: 2px solid var(--success-color); }
+        .dropzone .agg-menu-icon {
+            position: absolute; top: 5px; right: 8px; font-size: 0.8em; cursor: pointer; color: white;
+            background-color: var(--success-color); border-radius: 50%; width: 20px; height: 20px; line-height: 20px; text-align: center;
+        }
+
+        /* PANEL DE PERSONALIZACIÓN */
+        #customization-panel { display: none; }
+        .custom-option { margin-bottom: 15px; }
+        .custom-option.inline-option { display: flex; align-items: center; gap: 10px; }
+        .inline-option input[type="checkbox"] { width: auto; }
+        .inline-option label { margin-bottom: 0; }
+        #close-customization-btn { margin-top: 10px; }
+
+        /* --- ÁREA DE CONTENIDO (DASHBOARD) --- */
+        .content-area { flex-grow: 1; min-width: 0; }
+        .grid-stack-item-content {
+            background-color: white; border-radius: 8px; box-shadow: var(--shadow); overflow: hidden;
+            display: flex; flex-direction: column; border: 3px solid transparent; transition: border-color 0.2s;
+        }
+        .grid-stack-item-content.active-widget { border-color: var(--secondary-color); }
+        .grid-stack-item-content.filtering-widget { border-color: var(--danger-color); }
+        .widget-header {
+            background-color: #f8f9fa; padding: 10px 15px; cursor: grab; display: flex;
+            justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);
+        }
+        .widget-title { font-weight: bold; color: var(--primary-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .widget-controls button { background: none; border: none; font-size: 1.2em; cursor: pointer; opacity: 0.7; }
+        .widget-content { flex-grow: 1; padding: 15px; position: relative; display: flex; justify-content: center; align-items: center; color: #888; min-height: 0; }
+        .widget-error {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; color: var(--danger-color); font-weight: bold;
+        }
+        .widget-error p:first-child { font-size: 2.5em; margin: 0; line-height: 1; }
+        .widget-error p:last-child { font-size: 0.9em; margin-top: 10px; }
+        .summary-table-wrapper { width: 100%; height: 100%; overflow: auto; }
+        .summary-table-wrapper table { width: 100%; border-collapse: collapse; }
+        .summary-table-wrapper th { background-color: #f2f2f2; font-weight: bold; }
+        .summary-table-wrapper th, .summary-table-wrapper td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-color); }
+
+
+        /* --- OTROS ELEMENTOS Y RESPONSIVIDAD --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6);
+            display: none; justify-content: center; align-items: center; z-index: 1050;
+        }
+        .modal-overlay.visible { display: flex; }
+        .modal { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 90%; max-width: 400px; }
+        .modal h3 { margin-top: 0; }
+        .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;}
+        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 2000; }
+        .toast {
+            background-color: var(--success-color); color: white; padding: 15px; border-radius: 5px;
+            margin-bottom: 10px; box-shadow: var(--shadow); opacity: 0;
+            transform: translateX(100%); animation: slideIn 0.5s forwards;
+        }
+        .toast.error { background-color: var(--danger-color); }
+        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+        .context-menu {
+            display: none; position: absolute; background-color: white; border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 1001;
+        }
+        .context-menu div { padding: 10px 15px; cursor: pointer; }
+        .context-menu div:hover { background-color: var(--light-gray); }
+        .footer { text-align: center; padding: 10px; font-size: 0.8em; color: #666; background-color: #e9ecef; border-top: 1px solid var(--border-color); flex-shrink: 0; }
+        .footer-link { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+        
+        @media (max-width: 1200px) {
+            #main-screen.active { flex-direction: column; }
+            .sidebar { width: 100%; max-height: none; box-sizing: border-box; }
+        }
+        
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; gap: 10px; padding: 1rem; }
+            .sidebar { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="favicon.ico" alt="Metrika Logo" class="header-logo">
+        <div class="header-text"><h1>Metrika</h1><p>Tu herramienta para visualizar datos de forma sencilla</p></div>
+        <div id="close-app-btn" class="close-app-btn" title="Cerrar Aplicación"><span>×</span></div>
+    </header>
+    <main class="container">
+        <div id="upload-screen" class="step-screen active">
+            <h2>Comienza tu informe</h2>
+            <p>Selecciona un archivo en formato CSV o Excel (.xlsx) para empezar.</p>
+            <label for="file-input" class="file-upload-label">📂 Cargar Archivo</label>
+            <input type="file" id="file-input" accept=".csv,.xlsx" style="display: none;">
+        </div>
+        <div id="main-screen" class="step-screen">
+            <div class="sidebar">
+                <h3>Panel de Control</h3>
+                <div class="control-section">
+                    <div class="action-buttons-grid">
+                        <button id="add-viz-btn" class="main-button" title="Añadir un nuevo gráfico al dashboard">➕ Añadir Gráfico</button>
+                        <button id="new-report-btn" class="secondary-button" title="Empezar un nuevo informe desde cero">✨ Nuevo Reporte</button>
+                        <button id="save-config-btn" class="action-button save-button" disabled title="Guardar la configuración actual del dashboard">💾 Guardar</button>
+                        <label for="load-config-input" id="load-config-label" class="action-button load-button disabled" title="Cargar una configuración de dashboard guardada">📂 Cargar</label>
+                        <input type="file" id="load-config-input" accept=".json" style="display: none;">
+                    </div>
+                </div>
+                <div id="widget-config-section" class="control-section">
+                    <h4 id="config-title">Configurar Gráfico</h4>
+                    <label for="chart-type">Tipo de Visualización:</label>
+                    <select id="chart-type">
+                        <option value="bar">Barras</option><option value="line">Líneas</option><option value="pie">Pastel (Torta)</option><option value="table">Tabla Resumen</option>
+                    </select>
+                    <div id="axis-config">
+                        <div id="x-axis-dropzone" class="dropzone">
+                            <p>Arrastra aquí para Eje X</p>
+                            <div id="x-axis-options" class="axis-options" style="display: none;"></div>
+                        </div>
+                        <div id="y-axis-dropzone" class="dropzone">
+                            <p>Arrastra aquí para Eje Y</p>
+                            <span class="agg-menu-icon" style="display: none;">▼</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="customization-panel" class="control-section" style="display: none;">
+                    <h4 id="customization-title">Personalizar Gráfico</h4>
+                    <div class="custom-option"><label for="custom-title-input">Título Personalizado:</label><input type="text" id="custom-title-input" class="modal-input"></div>
+                    <div class="custom-option inline-option"><input type="checkbox" id="show-title-toggle" checked><label for="show-title-toggle">Mostrar Título</label></div>
+                    <div class="custom-option inline-option"><input type="checkbox" id="show-legend-toggle" checked><label for="show-legend-toggle">Mostrar Leyenda</label></div>
+                    <div class="custom-option"><label for="legend-position-select">Posición de la Leyenda:</label><select id="legend-position-select"><option value="top">Arriba</option><option value="bottom">Abajo</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></div>
+                    <div class="custom-option"><label for="color-palette-select">Paleta de Colores:</label><select id="color-palette-select"><option value="default">Metrika (Defecto)</option><option value="office">Oficina</option><option value="ocean">Océano</option><option value="sunset">Atardecer</option><option value="grayscale">Escala de Grises</option></select></div>
+                    <button id="close-customization-btn" class="secondary-button">Cerrar Personalización</button>
+                </div>
+                <div class="control-section">
+                    <h4>Columnas Disponibles</h4>
+                    <p class="instructions">Arrastra columnas. Haz clic en ✏️ para renombrar.</p>
+                    <div id="column-list" class="column-list-container"></div>
+                </div>
+                <div class="control-section">
+                    <h4>Filtros Globales</h4>
+                    <p class="instructions">Estos filtros afectan a TODOS los gráficos.</p>
+                    <div id="filter-container"></div>
+                </div>
+                <div class="export-buttons-group">
+                    <button id="export-report-btn" class="secondary-button" disabled>📤 Exportar Dashboard</button>
+                    <button id="export-data-btn" class="tertiary-button" disabled>📋 Exportar Datos</button>
+                </div>
+            </div>
+            <div class="content-area">
+                <div id="dashboard-area" class="grid-stack"></div>
+            </div>
+        </div>
+    </main>
+    <div id="rename-modal-overlay" class="modal-overlay"><div class="modal"><h3 id="rename-modal-title">Renombrar Columna</h3><input type="text" id="rename-input" class="modal-input"><div class="modal-buttons"><button id="rename-cancel-btn" class="secondary-button">Cancelar</button><button id="rename-ok-btn" class="main-button">Aceptar</button></div></div></div>
+    <div id="confirm-modal-overlay" class="modal-overlay"><div class="modal"><h3 id="confirm-modal-title">Confirmar Acción</h3><p id="confirm-modal-text">¿Estás seguro?</p><div class="modal-buttons"><button id="confirm-cancel-btn" class="secondary-button">Cancelar</button><button id="confirm-ok-btn" class="danger-button">Confirmar</button></div></div></div>
+    <div id="toast-container"></div>
+    <div id="aggregation-menu" class="context-menu">
+        <div data-agg="sum">Suma</div>
+        <div data-agg="average">Promedio</div>
+        <div data-agg="count">Recuento</div>
+        <div data-agg="max">Máximo</div>
+        <div data-agg="min">Mínimo</div>
+    </div>
+    <footer class="footer">
+        <p>Copyright © 2025 Mauricio Luftman. Todos los derechos reservados. | <a href="Manual.html" target="_blank" class="footer-link">Manual de Usuario</a></p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gridstack@9.4.0/dist/gridstack-all.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
