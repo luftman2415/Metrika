@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metrika - Dashboard</title>
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwM2RhNSI+PHBhdGggZD0iTTIyIDJINGMtMS4xIDAtMiAuOS0yIDJ2MTRjMCAxLjEuOSAyIDIgMmgxOGMxLjEgMCAyLS45IDItMlY0YzAtMS4xLS45LTItMi0yem0tOCAxNkg4di02aDZ2NnptMCAySDh2Mmg2di0yem04LTJoLTZ2Mmg2di0yem0wLTRINHYtMmgxNnYyem0wLTRINHYtMmgxNnYyeiIvPjwvc3ZnPg==" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/gridstack@9.4.0/dist/gridstack.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 </head>
 <body>
     <header>
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yMiAySDRjLTEuMSAwLTIgLjktMiAydjE0YzAgMS4xLjkgMiAyIDJoMThjMS4xIDAgMi0uOSAyLTJWNEMwLTEuMS0uOS0yLTItMnptLTggMTZIOHYtNmg2djZ6bTAgMkM4djJoNnYtMnptOC0yaC02djJoNnYtMnptMC00SDR2LTJoMTZ2MnptMC00SDR2LTJoMTZ2MnoiLz48L3N2Zz4=" alt="Metrika Logo" class="header-logo">
+        <img src="favicon.ico" alt="Metrika Logo" class="header-logo">
         <div class="header-text"><h1>Metrika</h1><p>Tu herramienta para visualizar datos de forma sencilla</p></div>
         <div id="close-app-btn" class="close-app-btn" title="Cerrar Aplicación"><span>×</span></div>
     </header>
     <main class="container">
         <div id="upload-screen" class="step-screen active">
             <h2>Comienza tu informe</h2>
-            <p>Selecciona un archivo de datos en formato CSV o Excel (.xlsx) para empezar.</p>
-            <label for="file-input" class="file-upload-label">📂 Cargar Archivo de Datos</label>
+            <p>Selecciona un archivo en formato CSV o Excel (.xlsx) para empezar.</p>
+            <label for="file-input" class="file-upload-label">📂 Cargar Archivo</label>
             <input type="file" id="file-input" accept=".csv,.xlsx" style="display: none;">
         </div>
         <div id="main-screen" class="step-screen">
@@ -29,8 +29,8 @@
                     <div class="action-buttons-grid">
                         <button id="add-viz-btn" class="main-button" title="Añadir un nuevo gráfico al dashboard">➕ Añadir Gráfico</button>
                         <button id="new-report-btn" class="secondary-button" title="Empezar un nuevo informe desde cero">✨ Nuevo Reporte</button>
-                        <button id="save-config-btn" class="action-button save-button" disabled title="Guardar la configuración actual del dashboard (.json)">💾 Guardar Configuración</button>
-                        <label for="load-config-input" id="load-config-label" class="action-button load-button disabled" title="Cargar una configuración .json (Primero carga el archivo de datos CSV/Excel)">📂 Cargar Configuración</label>
+                        <button id="save-config-btn" class="action-button save-button" disabled title="Guardar la configuración actual del dashboard">💾 Guardar</button>
+                        <label for="load-config-input" id="load-config-label" class="action-button load-button disabled" title="Cargar una configuración de dashboard guardada">📂 Cargar</label>
                         <input type="file" id="load-config-input" accept=".json" style="display: none;">
                     </div>
                 </div>
