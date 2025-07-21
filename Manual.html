@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual de Usuario - Metrika</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjU2djI1NkgweiIvPjxwYXRoIGZpbGw9IiMwMDNkYDUiIGQ9Ik0yMDggNDhIMjRhOCA4IDAgMCAwLTggOHYxNDRhOCA4IDAgMCAwIDggOGgxODRhOCA4IDAgMCAwIDgtOHYtODBhOCA4IDAgMCAwLTE2IDBoNzJ2LTgwaC03MmE4IDggMCAwIDAgMCAxNmg3MmE4IDggMCAwIDAgOC04VjU2YTggOCAwIDAgMC04LThabS00MCAxMzZINDhWODBoMTIwWm0yNC0xMTJhOCA4IDAgMCAxLTggOFYyNEw0MCAxNjhhOCA4IDAgMSAxLTguMi0xNS44TDE2OCA0MEgxMDZhOCA4IDAgMCAxIDAtMTZoNzJhOCA4IDAgMCAxIDggOFptLTYwLjIgNjMuOEw5NiAxMDQuMmE4IDggMCAwIDAtMTQgMEw0MCAxNDguMmE4IDggMCAxIDAgMTEuOCAxMS44TDEwNCAxMDhsNTggNTMuOGE4IDggMCAwIDAgMTEuOC0xMS44WiIvPjwvc3ZnPg==" type="image/svg+xml">
     <link rel="stylesheet" href="manual_style.css">
 </head>
 <body>
     <div class="page-wrapper">
         <header>
             <div class="header-content">
-                <img src="favicon.ico" alt="Metrika Logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIGQ9Ik0wIDBoMjU2djI1NkgweiIvPjxwYXRoIGZpbGw9IiMwMDNkYDUiIGQ9Ik0yMDggNDhIMjRhOCA4IDAgMCAwLTggOHYxNDRhOCA4IDAgMCAwIDggOGgxODRhOCA4IDAgMCAwIDgtOHYtODBhOCA4IDAgMCAwLTE2IDBoNzJ2LTgwaC03MmE4IDggMCAwIDAgMCAxNmg3MmE4IDggMCAwIDAgOC04VjU2YTggOCAwIDAgMC04LThabS00MCAxMzZINDhWODBoMTIwWm0yNC0xMTJhOCA4IDAgMCAxLTggOFYyNEw0MCAxNjhhOCA4IDAgMSAxLTguMi0xNS44TDE2OCA0MEgxMDZhOCA4IDAgMCAxIDAtMTZoNzJhOCA4IDAgMCAxIDggOFptLTYwLjIgNjMuOEw5NiAxMDQuMmE4IDggMCAwIDAtMTQgMEw0MCAxNDguMmE4IDggMCAxIDAgMTEuOCAxMS44TDEwNCAxMDhsNTggNTMuOGE4IDggMCAwIDAgMTEuOC0xMS44WiIvPjwvc3ZnPg==" alt="Metrika Logo">
                 <div class="header-text">
                     <h1>Manual de Usuario - Metrika</h1>
                     <p>Tu guía para crear informes visuales de manera sencilla.</p>
@@ -43,13 +42,10 @@
                     <h2>2. Primeros Pasos</h2>
                     <p>Para empezar a trabajar con Metrika, lo primero que necesitas es cargar tus datos.</p>
                     <ol>
-                        <li>En la pantalla de bienvenida, haz clic en el botón <strong>📂 Cargar Archivo</strong>.</li>
+                        <li>En la pantalla de bienvenida, haz clic en el botón <strong>📂 Cargar Archivo de Datos</strong>.</li>
                         <li>Selecciona un archivo desde tu computador. Metrika soporta los formatos <strong>.csv</strong> y <strong>.xlsx</strong> (Excel).</li>
                         <li>Una vez cargado, la aplicación te llevará automáticamente a la pantalla principal de trabajo.</li>
                     </ol>
-                    <div class="img-placeholder">
-                        <p><strong>Ejemplo Visual:</strong> Pantalla de bienvenida de Metrika, destacando el botón central para la carga de archivos.</p>
-                    </div>
                 </section>
                 
                 <section id="interfaz">
@@ -115,15 +111,19 @@
                 <section id="guardar-exportar">
                     <h2>6. Guardar y Exportar</h2>
                     <h3>Guardar y Cargar Configuración</h3>
+                    <p>Este flujo te permite a ti (o a un colega) recrear un dashboard exactamente como lo dejaste.</p>
                     <ul>
-                        <li><strong>Guardar (💾):</strong> Guarda la estructura completa de tu dashboard (qué gráficos hay, cómo están configurados, filtros, etc.) en un archivo <code>.json</code>. Esto NO guarda los datos, solo la configuración.</li>
-                        <li><strong>Cargar (📂):</strong> Si tienes un archivo de datos cargado, puedes usar esta opción para cargar un archivo <code>.json</code> y restaurar un dashboard que habías guardado previamente.</li>
+                        <li><strong>Guardar Configuración (💾):</strong> Guarda la estructura completa de tu dashboard en un archivo <code>.json</code>. Este archivo es muy pequeño porque **no contiene tus datos**, solo las instrucciones de cómo construir el informe.</li>
+                        <li><strong>Cargar Configuración (📂):</strong> Para que esto funcione, la otra persona debe:
+                            <ol>
+                                <li>Abrir Metrika y cargar el **mismo archivo de datos (CSV/Excel)** que tú usaste.</li>
+                                <li>Hacer clic en el botón <strong>"Cargar Configuración"</strong> en el panel de control (NO el de la pantalla de inicio).</li>
+                                <li>Seleccionar el archivo <code>.json</code> que tú le enviaste.</li>
+                            </ol>
+                        </li>
                     </ul>
-                    <h3>Exportar Reporte</h3>
-                    <ul>
-                        <li><strong>Exportar Dashboard:</strong> Crea un archivo HTML independiente con una imagen visual de tu dashboard actual. Ideal para compartir por correo o en presentaciones.</li>
-                        <li><strong>Exportar Datos:</strong> Crea un archivo HTML con una tabla de los datos actualmente visibles (aplicando los filtros globales y el filtro cruzado si están activos).</li>
-                    </ul>
+                    <h3>Exportar Dashboard</h3>
+                    <p>Esta es la forma más fácil de compartir un reporte **visual** no interactivo. Crea un archivo HTML único con una imagen de tu dashboard. Ideal para enviar por correo o para presentaciones.</p>
                 </section>
             </main>
         </div>
